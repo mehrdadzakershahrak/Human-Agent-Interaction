@@ -2,6 +2,7 @@
 ## About
 ### Human-Agent Interaction Research Platform**
 **Project Sponsor** - Human Systems Engineering Department
+Mehrdad Zaker Shahrak
 
 The goals of the project are as following: 
 1. Porting the existing java application to a web application 
