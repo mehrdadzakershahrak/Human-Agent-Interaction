@@ -1,0 +1,130 @@
+<html>
+<head>
+    <base href="/">
+
+    <!--bootstrap CDN CSS-->
+<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ -->
+    <!--CSS files-->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-material.css">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/login.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/questionnaire.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/introjs.css">
+
+    
+    <!--bootstrap tag for enabling mobile view-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!--Main Angular Files-->
+    <script src="assets/js/angular.js"></script>
+    <script src="assets/js/angular-route.js"></script>
+    <script src="assets/js/angular-animate.js"></script>
+    <script src="assets/js/angular-cookies.js"></script>  
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
+     <script src="assets/js/intro.js"></script>
+     
+    <!--Angular Config/Routes-->
+    <script src="app/app.js"></script>
+    <script src="app/routes.js"></script>
+
+    <!--Angular Controllers-->
+    <script src="app/controllers/trialInfoCtrl.js"></script>
+    <script src="app/controllers/gameConfigCtrl.js"></script>
+    <script src="app/controllers/gamePageCtrl.js"></script>
+    <script src="app/controllers/authCtrl.js"></script>
+    <script src="app/controllers/manageAdminCtrl.js"></script>
+    <script src="app/controllers/homeCtrl.js"></script>
+    <script src="app/controllers/adminCtrl.js"></script>
+    <script src="app/controllers/reportCtrl.js"></script>
+    <script src="app/controllers/preGameQuestionnaireCtrl.js"></script>
+    <script src="app/controllers/postGameQuestionnaireCtrl.js"></script>
+    <script src="app/controllers/exportCtrl.js"></script>
+    <script src="app/controllers/tutorialPageCtrl.js"></script>
+
+
+    
+    <!--Angular Services-->
+    <script src="app/services/trialInfoServices.js"></script>
+    <script src="app/services/gameConfigServices.js"></script>
+    <script src="app/services/authServices.js"></script>
+    <script src="app/services/manageAdminServices.js"></script>
+    <script src="app/services/adminServices.js"></script>
+    <script src="app/services/gamePageServices.js"></script>
+    <script src="app/services/roomServices.js"></script>
+    <script src="app/services/agentServices.js"></script>
+    <script src="app/services/reportServices.js"></script>
+    <script src="app/services/circleServices.js"></script>
+    <script src="app/services/gameStateServices.js"></script>
+    <script src="app/services/userStatsServices.js"></script>
+    <script src="app/services/questionnaireServices.js"></script>
+    <script src="app/services/exportServices.js"></script>
+    <script src="app/services/scrollingServices.js"></script>
+    <script src="app/services/refreshServices.js"></script>
+    <script src="app/services/globalServices.js"></script>
+
+
+
+    <script src="assets/images/"></script>
+    <title>Index</title>
+</head>
+<body ng-app="userApp" ng-controller="homeController" ng-init="setCurrentUser(<%=user%>)"  >
+<nav class="navbar navbar-inverse navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">HMGame</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li ng-class="{active: $route.current.activeTab === 'playGame'}"><a href="/">Play</a></li>
+                <li ng-class="{active: $route.current.activeTab === 'adminPanel'}" ng-if="isAdmin()">
+                    <a href="/admin">Admin Panel</a>
+                </li>
+                <li ng-class="{active: $route.current.activeTab === 'manageAdm'}" ng-if="isSuperAdmin()">
+                    <a href="/admin/manage">Manage Admin</a>
+                </li>
+                <li ng-class="{active: $route.current.activeTab === 'gameConf'}" ng-if="isAdmin()">
+                    <a href="/admin/gameconfig">New Game</a>
+                </li>
+                <li ng-class="{active: $route.current.activeTab === 'reporting'}" ng-if="isAdmin()">
+                    <a href="/admin/reporting">Report</a>
+                </li>
+                <li ng-class="{active: $route.current.activeTab === 'exports'}" ng-if="isAdmin()">
+                    <a href="/admin/exports">CSV Exports</a>
+                </li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-if="!isAdmin()"><a href="/admin/login">Login <small>(Admins Only)</small></a></li>
+                <li ng-if="isAdmin()"><a href="#" ng-click="logOut()">Logout</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container theme-showcase" role="main">
+<!--     <div class="jumbotron">
+        <h3>Hospital management Game</h3>
+        <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
+    </div> -->
+    <div ng-view></div>
+    <script src="assets/js/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

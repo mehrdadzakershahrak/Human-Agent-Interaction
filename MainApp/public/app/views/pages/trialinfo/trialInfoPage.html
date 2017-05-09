@@ -1,0 +1,75 @@
+<div class="page-header">
+    <h1>Disclaimer</h1>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Welcome!
+                </h3>
+            </div>
+            <div class="panel-body">
+                <h4>Microworld Hospital</h4>
+                <h5>Human-Agent Interaction Study</h5>
+
+                <p>I am a PhD student under the direction of Professor Erin Chiou in the Department of Computing,
+                    Informatics and Decision System Engineering at Arizona State University. I am conducting a research
+                    study to understand the reciprocal exchange relationship between human and agent.</p>
+
+                <p>I am inviting your participation, which will involve 15 minutes of your time. You need to answer some
+                    general questions about your habits and, play a game provided by this website. You have the right
+                    not to answer any question, and to stop participation at any time. Your participation in this study
+                    is voluntary. If you choose not to participate or to withdraw from the study at any time, there will
+                    be no penalty.</p>
+
+                <p>The result of your participation in this study will be used in reports, presentations, or
+                    publications to answer some open questions in the area of Human-Agent Interaction (HAI). There are
+                    no foreseeable risks or discomforts to your participation.</p>
+
+                <p>You do not need to provide your name, or release any private information for this study as your
+                    responses will be anonymous.</p>
+
+                <p>If you have any questions concerning the research study, please contact the research team at:
+                    (mehrdad@asu.edu).</p>
+
+                <p>If you have any questions about your rights as a subject / participant in this research, or if you
+                    feel you have been placed at risk, you can contact the Chair of the Human Subjects Institutional
+                    Review Board, through the ASU Office of Research Integrity and Assurance at (480) 965-6788.</p>
+
+                <p>Please let me know if you do not wish to be part of the study.</p>
+
+                <p><b>By clicking 'I agree', you are agreeing to be part of the study.</b></p>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="trialCheck"> I agree
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<form ng-submit="trialData.trialInfoData(trailData);">
+    <button class="btn btn-primary" type="submit">Next</button>
+</form>
+
+<div class="jumbotron text-center" id ="trialLoader" ng-show="trialData.loading">
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+
+    <p>Loading...</p>
+</div>
+
+<div class="row show-hide-message" id ="trialSuccess" ng-show="trialData.successMsg">
+    <div class="alert alert-success">
+        {{trialData.successMsg}}
+    </div>
+</div>
+
+<div class="row show-hide-message" id ="trialError" ng-show="trialData.errorMsg">
+    <div class="alert alert-danger">
+        {{trialData.errorMsg}}
+    </div>
+</div>

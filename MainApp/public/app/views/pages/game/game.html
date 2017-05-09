@@ -1,0 +1,487 @@
+<base href="/" />
+<div class="message"></div>
+<div class="container-fluid">
+
+
+    <!-- Collect Resources Modal -->
+    <div class="modal fade modal-remove" id="rTimeoutmodal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Collect Resources</h4>
+                </div>
+                <div id="modalbody" class="modal-body">
+                    <p>Timeup. Collect Resources from Room</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Game Over modal -->
+    <div class="modal fade" id="gameFinishedModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Done</h4>
+                </div>
+                <div id="modalbody" class="modal-body">
+                    <p>Congratulations. You have successfully finsihed the game. You saved {{gameData.gameState.score}} patients </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="gFMclose" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
+    <div class="modal fade modal-remove" id="notifyModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 id="notifyModalTitle" class="modal-title">Title</h4>
+                </div>
+                <div id="notifyModalbody" class="modal-body">
+                    <p>Message</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeNotify" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Notification Modal -->
+    <div class="modal fade modal-remove" id="startModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 id="startModalTitle" class="modal-title">Title</h4>
+                </div>
+                <div id="startModalBody" class="modal-body">
+                    <p>Message</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="startModalClose" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Share Resource Modal -->
+    <div class="modal fade modal-remove" id="shareResourceModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 id="shareResourceModalTitle" class="modal-title">Title</h4>
+                    <span id="shareResourceType" class="invisible"></span>
+                </div>
+                <div id="shareResourceModalBody" class="modal-body">
+                    <p>Message</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id = "btnRAccept" class="btn btn-default" data-dismiss="modal">Accept</button>
+                    <button type="button" id = "btnRDeny" class="btn btn-default" data-dismiss="modal">Deny</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row timeKeeper" id="timeKeeper">
+        <div class="col-xs-4">
+            <div class="text-left"><b>Time Left - {{counter}}</b></div>
+        </div>
+        <div class="col-xs-8">
+            <div><strong>Hospital Management Game <span id="practiceMode" style="color:red"></span></strong></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 resourcesCol" id="resourcesCol">
+            <div class="panel panel-primary waitingPanel" id="waitingPanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title hidden-xs">
+                        Your Waiting room
+                    </h3>
+                    <h3 class="panel-title mobile-panel-title visible-xs">
+                        Your Waiting room
+                    </h3>
+                </div>
+                <div class="panel-body P1" id="P1">
+                    <strong> Patient A: <span id="patientA"></span><br/> </strong>
+                    <strong> Patient B: <span id="patientB"></span><br/> </strong>
+                </div>
+            </div>
+            <div class="panel panel-primary resourcesPanel" id="resourcesPanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title hidden-xs">
+                        Your Available Resources
+                    </h3>
+                    <h3 class="panel-title mobile-panel-title visible-xs">
+                        Your Available Resources
+                    </h3>
+                </div>
+                <div class="panel-body S1" id="S1">
+                    <div class = "col-xs-6" >
+                        <strong>Doctors  : <span id="totalDoctors" class="sidebar">{{gameData.gameState.numberOfDoctors}} </span> <br/> </strong>
+                        <strong>Nurses   : <span id="totalNurses" class="sidebar"> {{gameData.gameState.numberOfNurses}} </span> <br/> </strong>
+                        <strong>Surgeons : <span id="totalSurgeons" class="sidebar"> {{gameData.gameState.numberOfSurgeons}} </span> <br/></strong>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="text-center">
+                            <strong>
+                                <span class="text-center">Score</span>
+                                <div class="square center v-align" id="playerScoreDiv">
+                                    <span id="playerScore">{{gameData.gameState.score}}</span>
+                                </div>
+                            </strong>
+                        </div>
+                    </div>
+                    <!--<div class="col-sm-6" id = "scorePanel">-->
+                        <!--<strong>-->
+                            <!--Score-->
+                            <!--<div id = "scoreDiv">-->
+                                <!--<div id ="scoreSpan">-->
+                                    <!--<span id = "playerScore">{{gameData.gameState.score}}</span>-->
+                                <!--</div>-->
+                           <!--</div>-->
+                        <!--</strong>-->
+                    <!--</div>   -->
+                </div>
+            </div>
+            <div class="panel panel-primary neighWaitingPanel" id="neighWaitingPanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title hidden-xs">
+                        Neighbor's Waiting room
+                    </h3>
+                    <h3 class="panel-title mobile-panel-title visible-xs">
+                        Neighbor's Waiting room
+                    </h3>
+                </div>
+                <div class="panel-body P2" id="P2">
+                    <div class = "col-xs-6" >
+                        <strong>
+                            <p class="text-center"> Patient A </p>
+                        </strong>
+                        <span id="otherPatientA"><div class="square center bg-green"></div></span><br/>
+                    </div>
+                    <div class = "col-xs-6" >
+                        <strong>
+                            <p class="text-center"> Patient B </p>
+                        </strong>
+                        <span id="otherPatientB"><div class="square center bg-green"></div></span><br/>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary neighResourcesPanel" id="neighResourcesPanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title hidden-xs">
+                        Neighbor's Available Resources
+                    </h3>
+                    <h3 class="panel-title mobile-panel-title visible-xs">
+                        Neighbor's Available Resources
+                    </h3>
+                </div>
+                <div class="panel-body S2" id="S2">
+                    <div class = "col-xs-6" >
+                        <strong>Doctors :<span id="nbrDoctors" class="sidebar">{{gameData.gameState.otherNumberOfDoctors}} </span> <br/> </strong>
+                        <strong>Nurses :<span id="nbrNurses" class="sidebar">{{gameData.gameState.otherNumberOfNurses}} </span> <br/> </strong>
+                        <strong>Surgeons :<span id="nbrSurgeons" class="sidebar">{{gameData.gameState.otherNumberOfSurgeons}} </span> <br/> </strong>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="text-center">
+                            <strong>
+                                <span class="text-center">Score</span>
+                                <div class="square center v-align" class="agentScoreDiv">
+                                    <span id="agentScore">{{gameData.gameState.otherScore}}</span>
+                                </div>
+                            </strong>
+                        </div>
+                    </div>
+                    <!--<div class="col-sm-6" id = "scorePanel">-->
+                        <!--<strong>-->
+                            <!--score-->
+                            <!--<div id = "scoreDiv">-->
+                                <!--<div id ="scoreSpan">-->
+                                    <!--<span id = "agentScore">{{gameData.gameState.otherScore}}</span>-->
+                                <!--</div>-->
+                           <!--</div>-->
+                        <!--</strong>-->
+                    <!--</div>    -->
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-8">
+            <div class="row roomsRow" id="roomsRow">
+                <div class="col-xs-4 room1Col" id="room1Col">
+                    <div id="div1" class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title hidden-xs">
+                                Room 1
+                            </h3>
+                            <h3 class="panel-title mobile-panel-title visible-xs">
+                                Room 1
+                            </h3>
+                        </div>
+                        <div class="panel-body fixed-panel center" id="R1">
+                            <span id="assignedPatient">VACANT</span> <br/>
+                            <span id="nDoctors">0</span> Doctors <br/>
+                            <span id="nNurses">0</span> Nurses <br/>
+                            <span id="nSurgeons">0</span> Surgeons <br/>
+                            <span id="hint"></span><br/>
+                        </div>
+                    </div>
+                    <div id="div2" class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title hidden-xs">
+                                Room 2
+                            </h3>
+                            <h3 class="panel-title mobile-panel-title visible-xs">
+                                Room 2
+                            </h3>
+                        </div>
+                        <div class="panel-body fixed-panel center" id="R2">
+                            <span id="assignedPatient">VACANT</span> <br/>
+                            <span id="nDoctors">0</span> Doctors <br/>
+                            <span id="nNurses">0</span> Nurses <br/>
+                            <span id="nSurgeons">0</span> Surgeons <br/>
+                            <span id="hint"></span><br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 room2Col" id="room2Col">
+                    <div id="div3" class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title hidden-xs">
+                                Room 3
+                            </h3>
+                            <h3 class="panel-title mobile-panel-title visible-xs">
+                                Room 3
+                            </h3>
+                        </div>
+                        <div class="panel-body fixed-panel center" id="R3">
+                            <span id="assignedPatient">VACANT</span> <br/>
+                            <span id="nDoctors">0</span> Doctors <br/>
+                            <span id="nNurses">0</span> Nurses <br/>
+                            <span id="nSurgeons">0</span> Surgeons <br/>
+                            <span id="hint"></span><br/>
+                        </div>
+                    </div>
+                    <div id="div4" class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title hidden-xs">
+                                Room 4
+                            </h3>
+                            <h3 class="panel-title mobile-panel-title visible-xs">
+                                Room 4
+                            </h3>
+                        </div>
+                        <div class="panel-body fixed-panel center" id="R4">
+                            <span id="assignedPatient">VACANT</span> <br/>
+                            <span id="nDoctors">0</span> Doctors <br/>
+                            <span id="nNurses">0</span> Nurses <br/>
+                            <span id="nSurgeons">0</span> Surgeons <br/>
+                            <span id="hint"></span><br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 room3Col" id="room3Col">
+                    <div id="div5" class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title hidden-xs">
+                                Room 5
+                            </h3>
+                            <h3 class="panel-title mobile-panel-title visible-xs">
+                                Room 5
+                            </h3>
+                        </div>
+                        <div class="panel-body fixed-panel center" id="R5">
+                            <span id="assignedPatient">VACANT</span> <br/>
+                            <span id="nDoctors">0</span> Doctors <br/>
+                            <span id="nNurses">0</span> Nurses <br/>
+                            <span id="nSurgeons">0</span> Surgeons <br/>
+                            <span id="hint"></span><br/>
+                        </div>
+                    </div>
+                    <div id="div6" class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title hidden-xs">
+                                Room 6
+                            </h3>
+                            <h3 class="panel-title mobile-panel-title visible-xs">
+                                Room 6
+                            </h3>
+                        </div>
+                        <div class="panel-body fixed-panel center" id="R6">
+                            <span id="assignedPatient">VACANT</span> <br/>
+                            <span id="nDoctors">0</span> Doctors <br/>
+                            <span id="nNurses">0</span> Nurses <br/>
+                            <span id="nSurgeons">0</span> Surgeons <br/>
+                            <span id="hint"></span><br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 playButtonsDiv" id="playButtonsDiv">
+                    <br class="hidden-xs">
+                    <div class="btn-group btn-group-justified prdiv" id="prdiv">
+                        <a href="#" class="btn btn-primary patients" id="patients">Assign Patients</a>
+                        <a href="#" class="btn btn-primary resources" id="resources">Assign Resources</a>
+                        <a href="#" class="btn btn-primary shareResources" id="shareResources">Share Resources</a>
+                    </div>
+                    <div id="patientsgroup" style="display: none;">
+                        <br class="hidden-xs">
+                        <div class="btn-group btn-group-justified">
+                            <a class="btn btn-primary btnA" id="btnA">Patient A</a>
+                            <a href="#" class="btn btn-primary btnB" id="btnB">Patient B</a>
+                        </div>
+                        <!-- <button class="btn btn-primary" id="btnA" type="submit" >Patient A</button>
+                        <button class="btn btn-primary" id="btnB" type="submit" >Patient B</button> -->
+                    </div>
+
+                    <div id="resourcesGroup" style="display: none;">
+                        <br class="hidden-xs">
+                        <div class="btn-group btn-group-justified">
+                            <a href='#' class="btn btn-primary btnDoctor" id="btnDoctor">Doctor</a>
+                            <a href="#" class="btn btn-primary btnNurse" id="btnNurse">Nurse</a>
+                            <a href="#" class="btn btn-primary btnSurgeon" id="btnSurgeon">Surgeon</a>
+                        </div>
+                        <!-- button class="btn btn-primary" id="btnDoctor" type="submit" >Doctor</button>
+                        <button class="btn btn-primary" id="btnNurse" type="submit" >Nurse</button>
+                        <button class="btn btn-primary" id="btnSurgeon" type="submit" >Surgeon</button> -->
+
+                    </div>
+
+                    <!-- Request Resources Button Group -->
+                    <div id="requestGroup" style="display: none;">
+                        <br class="hidden-xs">
+                        <div class="btn-group btn-group-justified">
+                            <a href="#" class="btn btn-primary btnShareDoctor" id="btnShareDoctor">Doctor</a>
+                            <a href="#" class="btn btn-primary btnShareNurse" id="btnShareNurse">Nurse</a>
+                            <a href="#" class="btn btn-primary btnShareSurgeon" id="btnShareSurgeon">Surgeon</a>
+                        </div>
+                    </div>
+
+                    <div id ="notify"> </div>
+                    <div id="successMsg" class="row show-hide-message padded" ng-show="gameData.successMsg">
+                        <div class="alert alert-success">
+                            {{gameData.successMsg}}
+                        </div>
+                    </div>
+
+                    <div id="errorMsg" class="row show-hide-message padded" ng-show="gameData.errorMsg" >
+                        <div class="alert alert-danger">
+                            {{gameData.errorMsg}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3><strong>Hi {{gameData.username}}! Welcome to Hospital Management Game.</strong></h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="z-depth-2 ">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Room 1</h3>
+          </div>
+        <div class="panel-body">
+           Vacant
+        </div> 
+        </div>
+      </div>
+    </div> 
+    <div class="col-sm-3">
+      <div class="z-depth-2 ">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Room 2</h3>
+          </div>
+        <div class="panel-body">
+            Vacant
+        </div> 
+        </div>
+      </div>
+    </div> 
+    <div class="col-sm-3">
+      <div class="z-depth-2 ">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Room 3</h3>
+          </div>
+        <div class="panel-body">
+            Vacant
+        </div> 
+        </div>
+      </div>
+    </div> 
+</div>
+<div class="row">
+    <div class="col-sm-3">
+      <div class="z-depth-2 ">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Room 4</h3>
+          </div>
+        <div class="panel-body">
+            Vacant
+        </div> 
+        </div>
+      </div>
+    </div> 
+   <div class="col-sm-3">
+      <div class="z-depth-2 ">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Room 5</h3>
+          </div>
+        <div class="panel-body">
+            Vacant
+        </div> 
+        </div>
+      </div>
+    </div> 
+   <div class="col-sm-3">
+      <div class="z-depth-2 ">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Room 6</h3>
+          </div>
+        <div class="panel-body">
+            Vacant
+        </div> 
+        </div>
+      </div>
+    </div>  
+</div>
+</div> -->
